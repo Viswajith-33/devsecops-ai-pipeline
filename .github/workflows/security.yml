@@ -19,3 +19,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: semgrep scan --config p/python --config p/owasp-top-ten --error
+
+  dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pip-audit
+      - run: pip-audit -r requirements.txt
+
