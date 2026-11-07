@@ -25,7 +25,7 @@ PIP-AUDIT:
 """
 
 key = os.environ["GEMINI_API_KEY"]
-url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
+url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent"
 r = requests.post(
     url,
     headers={"x-goog-api-key": key},
