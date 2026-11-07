@@ -25,13 +25,21 @@ PIP-AUDIT:
 """
 
 key = os.environ["GEMINI_API_KEY"]
-url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent"
-r = requests.post(
-    url,
-    headers={"x-goog-api-key": key},
-    json={"contents": [{"parts": [{"text": prompt}]}]},
-    timeout=60,
-)
+url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent"
+import time
+
+for attempt in range(5):
+    r = requests.post(
+        url,
+        headers={"x-goog-api-key": key},
+        json={"contents": [{"parts": [{"text": prompt}]}]},
+        timeout=60,
+    )
+    if r.status_code in (429, 500, 503):
+        print(f"Attempt {attempt + 1} failed ({r.status_code}), retrying...")
+        time.sleep(15)
+        continue
+    break
 r.raise_for_status()
 text = r.json()["candidates"][0]["content"]["parts"][0]["text"]
 
