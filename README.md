@@ -25,6 +25,8 @@ The demo app (`app.py`) and the old `requests` version are vulnerable on purpose
 
 The first runs show red on purpose, because the scanners blocked the vulnerable demo app. After I fixed the code and the library version, the pipeline passes.
 
+![Pipeline passing](pipeline-green.png)
+
 Example of the AI summary from one run:
 
 ![AI summary](ai-summary.png)
