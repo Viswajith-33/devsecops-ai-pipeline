@@ -10,7 +10,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install bandit
-      - run: bandit -r app.py
+      - run: bandit -r app.py -ll
 
   semgrep:
     runs-on: ubuntu-latest
@@ -18,7 +18,7 @@ jobs:
       image: semgrep/semgrep
     steps:
       - uses: actions/checkout@v4
-      - run: semgrep scan --config p/python --config p/owasp-top-ten --error
+      - run: semgrep scan --config p/python --config p/owasp-top-ten --error app.py
 
   dependencies:
     runs-on: ubuntu-latest
